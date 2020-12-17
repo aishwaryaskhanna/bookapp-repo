@@ -34,9 +34,9 @@ class _DetailsState extends State<Details> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
       (_) {
-        Provider.of<BookPageProvider>(context, listen: false)
+        Provider.of<BookPageModel>(context, listen: false)
             .setEntry(widget.entry);
-        Provider.of<BookPageProvider>(context, listen: false)
+        Provider.of<BookPageModel>(context, listen: false)
             .getFeed(widget.entry.author.uri.t.replaceAll(r'\&lang=en', ''));
       },
     );
@@ -44,9 +44,9 @@ class _DetailsState extends State<Details> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<BookPageProvider>(
-      builder: (BuildContext context, BookPageProvider detailsProvider,
-          Widget child) {
+    return Consumer<BookPageModel>(
+      builder:
+          (BuildContext context, BookPageModel detailsProvider, Widget child) {
         return Scaffold(
           appBar: AppBar(),
           body: ListView(
@@ -213,7 +213,7 @@ class _DetailsState extends State<Details> {
     );
   }
 
-  openBook(BookPageProvider provider) async {
+  openBook(BookPageModel provider) async {
     List dlList = await provider.getDownload();
     if (dlList.isNotEmpty) {
       Map dl = dlList[0];
@@ -240,7 +240,7 @@ class _DetailsState extends State<Details> {
     }
   }
 
-  _createDownloadButton(BookPageProvider provider, BuildContext context) {
+  _createDownloadButton(BookPageModel provider, BuildContext context) {
     if (provider.downloaded) {
       return FlatButton(
         onPressed: () => openBook(provider),

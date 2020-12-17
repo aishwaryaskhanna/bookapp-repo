@@ -6,7 +6,7 @@ import 'package:book_app/utility/response.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'category.dart';
 
-class CategoryProvider extends ChangeNotifier {
+class CategoryModel extends ChangeNotifier {
   ScrollController controller = ScrollController();
   List items = List();
   int page = 1;

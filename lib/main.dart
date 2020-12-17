@@ -13,11 +13,11 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => MainAppProvider()),
-        ChangeNotifierProvider(create: (_) => HomePageProvider()),
-        ChangeNotifierProvider(create: (_) => BookPageProvider()),
+        ChangeNotifierProvider(create: (_) => MainAppModel()),
+        ChangeNotifierProvider(create: (_) => HomePageModel()),
+        ChangeNotifierProvider(create: (_) => CategoryModel()),
+        ChangeNotifierProvider(create: (_) => BookPageModel()),
         ChangeNotifierProvider(create: (_) => LikedBooksModel()),
-        ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ],
       child: MyApp(),
     ),
@@ -27,9 +27,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<MainAppProvider>(
-      builder:
-          (BuildContext context, MainAppProvider appProvider, Widget child) {
+    return Consumer<MainAppModel>(
+      builder: (BuildContext context, MainAppModel appProvider, Widget child) {
         return MaterialApp(
           title: 'Book App',
           theme: appTheme(appProvider.theme),

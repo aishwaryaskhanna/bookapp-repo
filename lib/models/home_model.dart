@@ -4,7 +4,7 @@ import 'package:book_app/models/category.dart';
 import 'package:book_app/utility/feedbooks_api.dart';
 import 'package:book_app/utility/response.dart';
 
-class HomePageProvider with ChangeNotifier {
+class HomePageModel with ChangeNotifier {
   CategoryFeed top = CategoryFeed();
   CategoryFeed recent = CategoryFeed();
   Response response = Response.loading;

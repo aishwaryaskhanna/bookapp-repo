@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/theme/app_theme.dart';
 
-class MainAppProvider extends ChangeNotifier {
-  MainAppProvider();
+class MainAppModel extends ChangeNotifier {
+  MainAppModel();
 
   ThemeData theme = AppTheme.darkTheme;
   Key key = UniqueKey();

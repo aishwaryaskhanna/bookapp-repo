@@ -25,7 +25,7 @@ class _GenreState extends State<Genre> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
-      (_) => Provider.of<CategoryProvider>(context, listen: false)
+      (_) => Provider.of<CategoryModel>(context, listen: false)
           .getFeed(widget.url),
     );
   }
@@ -33,7 +33,7 @@ class _GenreState extends State<Genre> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (BuildContext context, CategoryProvider provider, Widget child) {
+      builder: (BuildContext context, CategoryModel provider, Widget child) {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,

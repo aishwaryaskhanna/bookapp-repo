@@ -17,16 +17,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
-      (_) => Provider.of<HomePageProvider>(context, listen: false).getFeeds(),
+      (_) => Provider.of<HomePageModel>(context, listen: false).getFeeds(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Consumer<HomePageProvider>(
+    return Consumer<HomePageModel>(
       builder:
-          (BuildContext context, HomePageProvider homeProvider, Widget child) {
+          (BuildContext context, HomePageModel homeProvider, Widget child) {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,

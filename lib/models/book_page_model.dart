@@ -12,7 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'category.dart';
 
-class BookPageProvider extends ChangeNotifier {
+class BookPageModel extends ChangeNotifier {
   CategoryFeed related = CategoryFeed();
   bool loading = true;
   Entry entry;
