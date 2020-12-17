@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:book_app/models/category.dart';
 import 'package:xml2json/xml2json.dart';
@@ -21,7 +22,7 @@ class Api {
   static String romance = '$publicDomainURL/top.atom?cat=FBFIC027000';
   static String horror = '$publicDomainURL/top.atom?cat=FBFIC015000';
 
-  Future<CategoryFeed> fetchCategoryBooks(String url) async {
+  Future<CategoryFeed> getCategory(String url) async {
     var res = await dio.get(url).catchError((e) {
       throw (e);
     });
@@ -32,7 +33,7 @@ class Api {
       var json = jsonDecode(xml2json.toGData());
       category = CategoryFeed.fromJson(json);
     } else {
-      throw ('Error encountered.');
+      throw ('Error ${res.statusCode}');
     }
     return category;
   }

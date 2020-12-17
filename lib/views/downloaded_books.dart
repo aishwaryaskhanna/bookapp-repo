@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epub_viewer/epub_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:book_app/components/progress_widget.dart';
+import 'package:book_app/components/loading_widget.dart';
 import 'package:book_app/database/download_helper.dart';
 import 'package:book_app/database/locator_helper.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -64,7 +64,7 @@ class _DownloadsState extends State<Downloads> {
 
               EpubViewer.setConfig(
                 identifier: 'androidBook',
-                themeColor: Colors.cyanAccent,
+                themeColor: Theme.of(context).accentColor,
                 scrollDirection: EpubScrollDirection.VERTICAL,
                 enableTts: false,
                 allowSharing: true,
@@ -90,7 +90,7 @@ class _DownloadsState extends State<Downloads> {
                     placeholder: (context, url) => Container(
                       height: 70.0,
                       width: 70.0,
-                      child: ProgressWidget(),
+                      child: LoadingWidget(),
                     ),
                     errorWidget: (context, url, error) => Image.asset(
                       'assets/images/place.png',

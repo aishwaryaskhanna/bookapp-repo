@@ -1,6 +1,8 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:book_app/components/custom_alert.dart';
+import 'package:book_app/util/consts.dart';
 
 class Dialogs {
   showExitDialog(BuildContext context) {
@@ -14,9 +16,17 @@ class Dialogs {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              SizedBox(height: 15.0),
+              Text(
+                Constants.appName,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
               SizedBox(height: 25.0),
               Text(
-                'Press OK to exit the app.',
+                'Are you sure you want to quit?',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14.0,
@@ -33,11 +43,12 @@ class Dialogs {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      borderSide: BorderSide(color: Colors.cyanAccent),
+                      borderSide:
+                          BorderSide(color: Theme.of(context).accentColor),
                       child: Text(
-                        'Cancel',
+                        'No',
                         style: TextStyle(
-                          color: Colors.cyanAccent,
+                          color: Theme.of(context).accentColor,
                         ),
                       ),
                       onPressed: () => Navigator.pop(context),
@@ -52,13 +63,13 @@ class Dialogs {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                       child: Text(
-                        'OK',
+                        'Yes',
                         style: TextStyle(
                           color: Colors.white,
                         ),
                       ),
                       onPressed: () => exit(0),
-                      color: Colors.cyanAccent,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 ],
