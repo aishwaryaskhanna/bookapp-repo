@@ -22,7 +22,7 @@ class _ProfileState extends State<Profile> {
         'function': () => PageRouter.pushPage(context, LikedBooks()),
       },
       {
-        'icon': Feather.download,
+        'icon': Feather.download_cloud,
         'title': 'Downloaded Books',
         'function': () => PageRouter.pushPage(context, Downloads()),
       },
