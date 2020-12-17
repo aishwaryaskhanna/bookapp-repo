@@ -4,7 +4,7 @@ import 'package:book_app/components/widget_creator.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/utility/page_router.dart';
 import 'package:book_app/models/home_model.dart';
-import 'package:book_app/views/categories.dart';
+import 'package:book_app/views/categorized_books_page.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {

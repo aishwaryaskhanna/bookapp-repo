@@ -1,11 +1,11 @@
+import 'package:book_app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:book_app/theme/theme_config.dart';
 import 'package:book_app/models/main_app_model.dart';
 import 'package:book_app/models/book_page_model.dart';
 import 'package:book_app/models/liked_books_model.dart';
 import 'package:book_app/models/category_model.dart';
 import 'package:book_app/models/home_model.dart';
-import 'package:book_app/views/main_screen.dart';
+import 'package:book_app/views/home_bottom_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Book App',
           theme: appTheme(appProvider.theme),
-          darkTheme: appTheme(ThemeConfig.darkTheme),
+          darkTheme: appTheme(AppTheme.darkTheme),
           debugShowCheckedModeBanner: false,
           home: MainScreen(),
         );

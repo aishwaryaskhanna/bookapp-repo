@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:book_app/theme/theme_config.dart';
+import 'package:book_app/theme/app_theme.dart';
 
 class MainAppProvider extends ChangeNotifier {
   MainAppProvider();
 
-  ThemeData theme = ThemeConfig.darkTheme;
+  ThemeData theme = AppTheme.darkTheme;
   Key key = UniqueKey();
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

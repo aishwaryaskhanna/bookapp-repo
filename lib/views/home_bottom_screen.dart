@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/components/exit_popup.dart';
 import 'package:book_app/views/home_page.dart';
-import 'package:book_app/views/options.dart';
+import 'package:book_app/views/options_page.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class MainScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:book_app/components/book.dart';
+import 'package:book_app/components/book_item.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/models/liked_books_model.dart';
 import 'package:provider/provider.dart';

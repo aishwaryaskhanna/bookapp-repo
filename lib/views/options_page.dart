@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/utility/page_router.dart';
-import 'package:book_app/views/downloaded_books.dart';
-import 'package:book_app/views/liked_books.dart';
+import 'package:book_app/views/downloaded_books_page.dart';
+import 'package:book_app/views/liked_books_page.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class Profile extends StatefulWidget {
