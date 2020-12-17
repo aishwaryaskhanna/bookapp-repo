@@ -92,10 +92,9 @@ class _DownloadsState extends State<Downloads> {
                               ? EpubLocator.fromJson(locators[0])
                               : null);
                       EpubViewer.locatorStream.listen((event) async {
-                        // Get locator here
                         Map json = jsonDecode(event);
                         json['bookId'] = dl['id'];
-                        // Save locator to your database
+
                         await LocatorDB().update(json);
                       });
                     },

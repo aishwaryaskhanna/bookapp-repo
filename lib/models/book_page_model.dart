@@ -58,11 +58,9 @@ class BookPageProvider extends ChangeNotifier {
     });
   }
 
-  // check if book has been downloaded before
   checkDownload() async {
     List downloads = await dlDB.check({'id': entry.id.t.toString()});
     if (downloads.isNotEmpty) {
-      // check if book has been deleted
       String path = downloads[0]['path'];
       print(path);
       if (await File(path).exists()) {
@@ -133,8 +131,6 @@ class BookPageProvider extends ChangeNotifier {
         path: path,
       ),
     ).then((v) {
-      // When the download finishes, we then add the book
-      // to our local database
       if (v != null) {
         addDownload(
           {

@@ -132,7 +132,7 @@ class _DetailsState extends State<Details> {
                                     SizedBox(height: 10.0),
                                     Center(
                                       child: Container(
-                                        height: 20.0,
+                                        height: 50.0,
                                         width:
                                             MediaQuery.of(context).size.width,
                                         child: IconButton(
@@ -156,7 +156,7 @@ class _DetailsState extends State<Details> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20.0),
+                                    SizedBox(height: 0.0),
                                     Center(
                                       child: Container(
                                         height: 50.0,
@@ -233,10 +233,8 @@ class _DetailsState extends State<Details> {
           lastLocation:
               locators.isNotEmpty ? EpubLocator.fromJson(locators[0]) : null);
       EpubViewer.locatorStream.listen((event) async {
-        // Get locator here
         Map json = jsonDecode(event);
         json['bookId'] = widget.entry.id.t.toString();
-        // Save locator to your database
         await LocatorDB().update(json);
       });
     }

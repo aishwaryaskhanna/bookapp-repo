@@ -20,7 +20,6 @@ class CategoryProvider extends ChangeNotifier {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
         if (!loadingMore) {
           paginate(url);
-          // Animate to bottom of list
           Timer(Duration(milliseconds: 100), () {
             controller.animateTo(
               controller.position.maxScrollExtent,

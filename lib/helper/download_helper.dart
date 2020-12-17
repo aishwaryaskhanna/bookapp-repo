@@ -5,12 +5,11 @@ import 'package:path_provider/path_provider.dart';
 
 class DownloadsDB {
   getPath() async {
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
-    final path = documentDirectory.path + '/downloads.db';
+    Directory appDocDirectory = await getApplicationDocumentsDirectory();
+    final path = appDocDirectory.path + '/downloads.db';
     return path;
   }
 
-  //Insertion
   add(Map item) async {
     final db = ObjectDB(await getPath());
     db.open();
@@ -28,6 +27,15 @@ class DownloadsDB {
     return val;
   }
 
+  Future<List> listAll() async {
+    final db = ObjectDB(await getPath());
+    db.open();
+    List val = await db.find({});
+    db.tidy();
+    await db.close();
+    return val;
+  }
+
   Future removeAllWithId(Map item) async {
     final db = ObjectDB(await getPath());
     db.open();
@@ -39,13 +47,10 @@ class DownloadsDB {
     await db.close();
   }
 
-  Future<List> listAll() async {
+  clear() async {
     final db = ObjectDB(await getPath());
     db.open();
-    List val = await db.find({});
-    db.tidy();
-    await db.close();
-    return val;
+    db.remove({});
   }
 
   Future<List> check(Map item) async {
@@ -55,11 +60,5 @@ class DownloadsDB {
     db.tidy();
     await db.close();
     return val;
-  }
-
-  clear() async {
-    final db = ObjectDB(await getPath());
-    db.open();
-    db.remove({});
   }
 }
