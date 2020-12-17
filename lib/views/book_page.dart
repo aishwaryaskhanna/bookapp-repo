@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:book_app/database/locator_helper.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/view_models/book_page_provider.dart';
+import 'package:book_app/view_models/book_page_model.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 

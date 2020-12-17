@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/theme/theme_config.dart';
-import 'package:book_app/view_models/app_provider.dart';
-import 'package:book_app/view_models/book_page_provider.dart';
-import 'package:book_app/view_models/liked_books_provider.dart';
-import 'package:book_app/view_models/category_provider.dart';
-import 'package:book_app/view_models/home_provider.dart';
+import 'package:book_app/view_models/main_app_model.dart';
+import 'package:book_app/view_models/book_page_model.dart';
+import 'package:book_app/view_models/liked_books_model.dart';
+import 'package:book_app/view_models/category_model.dart';
+import 'package:book_app/view_models/home_model.dart';
 import 'package:book_app/views/main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
