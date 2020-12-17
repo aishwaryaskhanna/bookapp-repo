@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
     return Consumer<MainAppModel>(
       builder: (BuildContext context, MainAppModel appProvider, Widget child) {
         return MaterialApp(
+          key: appProvider.key,
+          navigatorKey: appProvider.navigatorKey,
           title: 'Book App',
           theme: appTheme(appProvider.theme),
           darkTheme: appTheme(AppTheme.darkTheme),
