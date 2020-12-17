@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:book_app/components/book.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/view_models/liked_books_model.dart';
+import 'package:book_app/models/liked_books_model.dart';
 import 'package:provider/provider.dart';
 
 class LikedBooks extends StatefulWidget {
@@ -27,8 +27,7 @@ class _LikedBooksState extends State<LikedBooks> {
     SchedulerBinding.instance.addPostFrameCallback(
       (_) {
         if (mounted) {
-          Provider.of<LikedBooksProvider>(context, listen: false)
-              .getFavorites();
+          Provider.of<LikedBooksModel>(context, listen: false).getLikedBooks();
         }
       },
     );
@@ -36,8 +35,8 @@ class _LikedBooksState extends State<LikedBooks> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LikedBooksProvider>(
-      builder: (BuildContext context, LikedBooksProvider favoritesProvider,
+    return Consumer<LikedBooksModel>(
+      builder: (BuildContext context, LikedBooksModel favoritesProvider,
           Widget child) {
         return Scaffold(
           appBar: AppBar(

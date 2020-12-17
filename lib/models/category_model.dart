@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:book_app/util/api.dart';
 import 'package:book_app/util/api_request_status.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../models/category.dart';
+import 'category.dart';
 
 class CategoryProvider extends ChangeNotifier {
   ScrollController controller = ScrollController();

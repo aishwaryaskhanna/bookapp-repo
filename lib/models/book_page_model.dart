@@ -4,19 +4,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/download_popup.dart';
 import 'package:book_app/database/download_helper.dart';
-import 'package:book_app/database/favorite_helper.dart';
+import 'package:book_app/database/liked_books_helper.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/api.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../models/category.dart';
+import 'category.dart';
 
 class BookPageProvider extends ChangeNotifier {
   CategoryFeed related = CategoryFeed();
   bool loading = true;
   Entry entry;
-  var favDB = FavoriteDB();
+  var favDB = LikedBooksDB();
   var dlDB = DownloadsDB();
 
   bool faved = false;
@@ -38,7 +38,7 @@ class BookPageProvider extends ChangeNotifier {
 
   // check if book is favorited
   checkFav() async {
-    List c = await favDB.check({'id': entry.id.t.toString()});
+    List c = await favDB.isLiked({'id': entry.id.t.toString()});
     if (c.isNotEmpty) {
       setFaved(true);
     } else {
@@ -47,12 +47,13 @@ class BookPageProvider extends ChangeNotifier {
   }
 
   addFav() async {
-    await favDB.add({'id': entry.id.t.toString(), 'item': entry.toJson()});
+    await favDB
+        .addToLiked({'id': entry.id.t.toString(), 'item': entry.toJson()});
     checkFav();
   }
 
   removeFav() async {
-    favDB.remove({'id': entry.id.t.toString()}).then((v) {
+    favDB.removeFromLiked({'id': entry.id.t.toString()}).then((v) {
       print(v);
       checkFav();
     });
