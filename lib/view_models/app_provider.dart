@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:book_app/theme/theme_config.dart';
 
 class MainAppProvider extends ChangeNotifier {
-  MainAppProvider() {}
+  MainAppProvider();
 
   ThemeData theme = ThemeConfig.darkTheme;
   Key key = UniqueKey();

@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:book_app/components/download_alert.dart';
+import 'package:book_app/components/download_modal.dart';
 import 'package:book_app/database/download_helper.dart';
 import 'package:book_app/database/favorite_helper.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/api.dart';
-import 'package:book_app/util/consts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -29,7 +28,7 @@ class BookPageProvider extends ChangeNotifier {
     checkFav();
     checkDownload();
     try {
-      CategoryFeed feed = await api.getCategory(url);
+      CategoryFeed feed = await api.fetchCategoryBooks(url);
       setRelated(feed);
       setLoading(false);
     } catch (e) {
@@ -111,14 +110,12 @@ class BookPageProvider extends ChangeNotifier {
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {
-      Directory(appDocDir.path.split('Android')[0] + '${Constants.appName}')
-          .createSync();
+      Directory(appDocDir.path.split('Android')[0] + 'Book App').createSync();
     }
 
     String path = Platform.isIOS
         ? appDocDir.path + '/$filename.epub'
-        : appDocDir.path.split('Android')[0] +
-            '${Constants.appName}/$filename.epub';
+        : appDocDir.path.split('Android')[0] + 'Book App' + '/$filename.epub';
     print(path);
     File file = File(path);
     if (!await file.exists()) {
@@ -131,8 +128,8 @@ class BookPageProvider extends ChangeNotifier {
     showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => DownloadAlert(
-        url: url,
+      builder: (context) => DownloadModal(
+        bookUrl: url,
         path: path,
       ),
     ).then((v) {
