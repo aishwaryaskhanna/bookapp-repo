@@ -4,7 +4,7 @@ import 'package:book_app/models/category.dart';
 import 'package:book_app/util/api.dart';
 import 'package:book_app/util/api_request_status.dart';
 
-class HomeProvider with ChangeNotifier {
+class HomePageProvider with ChangeNotifier {
   CategoryFeed top = CategoryFeed();
   CategoryFeed recent = CategoryFeed();
   APIRequestStatus apiRequestStatus = APIRequestStatus.loading;

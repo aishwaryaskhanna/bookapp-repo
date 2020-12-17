@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:book_app/util/consts.dart';
 import 'package:book_app/theme/theme_config.dart';
 import 'package:book_app/view_models/app_provider.dart';
-import 'package:book_app/view_models/details_provider.dart';
-import 'package:book_app/view_models/favorites_provider.dart';
-import 'package:book_app/view_models/genre_provider.dart';
+import 'package:book_app/view_models/book_page_provider.dart';
+import 'package:book_app/view_models/liked_books_provider.dart';
+import 'package:book_app/view_models/category_provider.dart';
 import 'package:book_app/view_models/home_provider.dart';
 import 'package:book_app/views/main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,11 +13,11 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AppProvider()),
-        ChangeNotifierProvider(create: (_) => HomeProvider()),
-        ChangeNotifierProvider(create: (_) => DetailsProvider()),
-        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
-        ChangeNotifierProvider(create: (_) => GenreProvider()),
+        ChangeNotifierProvider(create: (_) => MainAppProvider()),
+        ChangeNotifierProvider(create: (_) => HomePageProvider()),
+        ChangeNotifierProvider(create: (_) => BookPageProvider()),
+        ChangeNotifierProvider(create: (_) => LikedBooksProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ],
       child: MyApp(),
     ),
@@ -28,24 +27,23 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppProvider>(
-      builder: (BuildContext context, AppProvider appProvider, Widget child) {
+    return Consumer<MainAppProvider>(
+      builder:
+          (BuildContext context, MainAppProvider appProvider, Widget child) {
         return MaterialApp(
-          key: appProvider.key,
+          title: 'Book App',
+          theme: appTheme(appProvider.theme),
+          darkTheme: appTheme(ThemeConfig.darkTheme),
           debugShowCheckedModeBanner: false,
-          navigatorKey: appProvider.navigatorKey,
-          title: Constants.appName,
-          theme: themeData(appProvider.theme),
-          darkTheme: themeData(ThemeConfig.darkTheme),
           home: MainScreen(),
         );
       },
     );
   }
 
-  ThemeData themeData(ThemeData theme) {
+  ThemeData appTheme(ThemeData theme) {
     return theme.copyWith(
-      textTheme: GoogleFonts.sourceSansProTextTheme(
+      textTheme: GoogleFonts.sourceSerifProTextTheme(
         theme.textTheme,
       ),
     );

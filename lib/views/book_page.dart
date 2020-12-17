@@ -4,10 +4,9 @@ import 'package:epub_viewer/epub_viewer.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:book_app/components/description_text.dart';
 import 'package:book_app/database/locator_helper.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/view_models/details_provider.dart';
+import 'package:book_app/view_models/book_page_provider.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -35,9 +34,9 @@ class _DetailsState extends State<Details> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
       (_) {
-        Provider.of<DetailsProvider>(context, listen: false)
+        Provider.of<BookPageProvider>(context, listen: false)
             .setEntry(widget.entry);
-        Provider.of<DetailsProvider>(context, listen: false)
+        Provider.of<BookPageProvider>(context, listen: false)
             .getFeed(widget.entry.author.uri.t.replaceAll(r'\&lang=en', ''));
       },
     );
@@ -45,8 +44,8 @@ class _DetailsState extends State<Details> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DetailsProvider>(
-      builder: (BuildContext context, DetailsProvider detailsProvider,
+    return Consumer<BookPageProvider>(
+      builder: (BuildContext context, BookPageProvider detailsProvider,
           Widget child) {
         return Scaffold(
           appBar: AppBar(),
@@ -59,9 +58,19 @@ class _DetailsState extends State<Details> {
               _buildSectionTitle('Description'),
               _buildDivider(),
               SizedBox(height: 10.0),
-              DescriptionTextWidget(
-                text: '${widget.entry.summary.t}',
+              Text(
+                '${widget.entry.summary.t}'
+                    .replaceAll(r'\n', '\n')
+                    .replaceAll(r'\r', '')
+                    .replaceAll(r"\'", "'"),
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Theme.of(context).textTheme.caption.color,
+                ),
               ),
+              //DescriptionTextWidget(
+              //text: '${widget.entry.summary.t}',
+              //),
             ],
           ),
         );
@@ -75,7 +84,7 @@ class _DetailsState extends State<Details> {
     );
   }
 
-  _buildImageTitleSection(DetailsProvider detailsProvider) {
+  _buildImageTitleSection(BookPageProvider detailsProvider) {
     return Container(
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -180,7 +189,7 @@ class _DetailsState extends State<Details> {
                           SizedBox(height: 20.0),
                           Center(
                             child: Container(
-                              height: 20.0,
+                              height: 50.0,
                               width: MediaQuery.of(context).size.width,
                               child: IconButton(
                                 onPressed: () => _share(),
@@ -205,14 +214,14 @@ class _DetailsState extends State<Details> {
     return Text(
       '$title',
       style: TextStyle(
-        color: Theme.of(context).accentColor,
+        color: Colors.cyanAccent, //Theme.of(context).accentColor
         fontSize: 20.0,
         fontWeight: FontWeight.bold,
       ),
     );
   }
 
-  openBook(DetailsProvider provider) async {
+  openBook(BookPageProvider provider) async {
     List dlList = await provider.getDownload();
     if (dlList.isNotEmpty) {
       Map dl = dlList[0];
@@ -223,7 +232,7 @@ class _DetailsState extends State<Details> {
 
       EpubViewer.setConfig(
         identifier: 'androidBook',
-        themeColor: Theme.of(context).accentColor,
+        themeColor: Colors.cyanAccent,
         scrollDirection: EpubScrollDirection.VERTICAL,
         enableTts: false,
         allowSharing: true,
@@ -241,14 +250,14 @@ class _DetailsState extends State<Details> {
     }
   }
 
-  _buildDownloadReadButton(DetailsProvider provider, BuildContext context) {
+  _buildDownloadReadButton(BookPageProvider provider, BuildContext context) {
     if (provider.downloaded) {
       return FlatButton(
         onPressed: () => openBook(provider),
         child: Text(
-          'Read Book',
+          'Read Now',
           style: TextStyle(
-            color: Theme.of(context).accentColor,
+            color: Colors.cyanAccent,
           ),
         ),
       );
@@ -262,7 +271,7 @@ class _DetailsState extends State<Details> {
         child: Text(
           'Download',
           style: TextStyle(
-            color: Theme.of(context).accentColor,
+            color: Colors.cyanAccent,
           ),
         ),
       );
@@ -271,8 +280,8 @@ class _DetailsState extends State<Details> {
 
   _share() {
     Share.text(
-      '${widget.entry.title.t} by ${widget.entry.author.name.t}',
-      'Read/Download ${widget.entry.title.t} from ${widget.entry.link[3].href}.',
+      'Share "${widget.entry.title.t}" with',
+      'Glad to share the book "${widget.entry.title.t}" with you! Get it now from ${widget.entry.link[3].href}.',
       'text/plain',
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:book_app/components/book.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/view_models/favorites_provider.dart';
+import 'package:book_app/view_models/liked_books_provider.dart';
 import 'package:provider/provider.dart';
 
 class Favorites extends StatefulWidget {
@@ -27,7 +27,8 @@ class _FavoritesState extends State<Favorites> {
     SchedulerBinding.instance.addPostFrameCallback(
       (_) {
         if (mounted) {
-          Provider.of<FavoritesProvider>(context, listen: false).getFavorites();
+          Provider.of<LikedBooksProvider>(context, listen: false)
+              .getFavorites();
         }
       },
     );
@@ -35,8 +36,8 @@ class _FavoritesState extends State<Favorites> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FavoritesProvider>(
-      builder: (BuildContext context, FavoritesProvider favoritesProvider,
+    return Consumer<LikedBooksProvider>(
+      builder: (BuildContext context, LikedBooksProvider favoritesProvider,
           Widget child) {
         return Scaffold(
           appBar: AppBar(
@@ -75,7 +76,7 @@ class _FavoritesState extends State<Favorites> {
     );
   }
 
-  _buildGridView(FavoritesProvider favoritesProvider) {
+  _buildGridView(LikedBooksProvider favoritesProvider) {
     return GridView.builder(
       padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
       shrinkWrap: true,

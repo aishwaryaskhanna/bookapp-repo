@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:book_app/database/favorite_helper.dart';
 
-class FavoritesProvider extends ChangeNotifier {
+class LikedBooksProvider extends ChangeNotifier {
   List posts = List();
   bool loading = true;
   var db = FavoriteDB();

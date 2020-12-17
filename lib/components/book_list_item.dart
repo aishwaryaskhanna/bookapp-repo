@@ -4,7 +4,7 @@ import 'package:book_app/components/loading_widget.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/router.dart';
 import 'package:uuid/uuid.dart';
-import '../views/details.dart';
+import '../views/book_page.dart';
 
 class BookListItem extends StatelessWidget {
   final String img;
@@ -113,7 +113,7 @@ class BookListItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w800,
-                          color: Theme.of(context).accentColor,
+                          color: Colors.cyanAccent,
                         ),
                       ),
                     ),

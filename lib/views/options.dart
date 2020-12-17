@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/util/router.dart';
-import 'package:book_app/views/downloads.dart';
-import 'package:book_app/views/favorites.dart';
+import 'package:book_app/views/downloaded_books.dart';
+import 'package:book_app/views/liked_books.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class Profile extends StatefulWidget {
@@ -18,18 +18,13 @@ class _ProfileState extends State<Profile> {
     items = [
       {
         'icon': Feather.heart,
-        'title': 'Favorites',
+        'title': 'Liked Books',
         'function': () => _pushPage(Favorites()),
       },
       {
         'icon': Feather.download,
-        'title': 'Downloads',
+        'title': 'Downloaded Books',
         'function': () => _pushPage(Downloads()),
-      },
-      {
-        'icon': Feather.info,
-        'title': 'About',
-        'function': () => showAbout(),
       },
     ];
   }
@@ -40,7 +35,7 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Settings',
+          'Options',
         ),
       ),
       body: ListView.separated(
@@ -68,30 +63,5 @@ class _ProfileState extends State<Profile> {
 
   _pushPage(Widget page) {
     MyRouter.pushPage(context, page);
-  }
-
-  showAbout() {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: Text(
-            'About',
-          ),
-          content: Text(
-            'A Book App for Readers',
-          ),
-          actions: <Widget>[
-            FlatButton(
-              textColor: Theme.of(context).accentColor,
-              onPressed: () => Navigator.pop(context),
-              child: Text(
-                'Close',
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 }

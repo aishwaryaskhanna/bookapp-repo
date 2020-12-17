@@ -5,7 +5,7 @@ import 'package:book_app/models/category.dart';
 import 'package:book_app/util/consts.dart';
 import 'package:book_app/util/router.dart';
 import 'package:book_app/view_models/home_provider.dart';
-import 'package:book_app/views/genre.dart';
+import 'package:book_app/views/categories.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -18,15 +18,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
-      (_) => Provider.of<HomeProvider>(context, listen: false).getFeeds(),
+      (_) => Provider.of<HomePageProvider>(context, listen: false).getFeeds(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Consumer<HomeProvider>(
-      builder: (BuildContext context, HomeProvider homeProvider, Widget child) {
+    return Consumer<HomePageProvider>(
+      builder:
+          (BuildContext context, HomePageProvider homeProvider, Widget child) {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -43,7 +44,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  Widget _buildBody(HomeProvider homeProvider) {
+  Widget _buildBody(HomePageProvider homeProvider) {
     return BodyBuilder(
       apiRequestStatus: homeProvider.apiRequestStatus,
       child: _buildBodyList(homeProvider),
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  Widget _buildBodyList(HomeProvider homeProvider) {
+  Widget _buildBodyList(HomePageProvider homeProvider) {
     return RefreshIndicator(
       onRefresh: () => homeProvider.getFeeds(),
       child: ListView(
@@ -84,7 +85,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  _buildGenreSection(HomeProvider homeProvider) {
+  _buildGenreSection(HomePageProvider homeProvider) {
     return Container(
       height: 420.0,
       child: Center(
@@ -105,7 +106,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               child: Container(
                 height: 50.0,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Colors.cyan[600],
                   borderRadius: BorderRadius.all(
                     Radius.circular(20.0),
                   ),

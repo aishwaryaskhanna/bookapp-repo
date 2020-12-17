@@ -4,8 +4,7 @@ import 'package:book_app/components/loading_widget.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/router.dart';
 import 'package:uuid/uuid.dart';
-
-import '../views/details.dart';
+import '../views/book_page.dart';
 
 class BookItem extends StatelessWidget {
   final String img;

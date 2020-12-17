@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingWidget extends StatelessWidget {
-  
   LoadingWidget();
 
   @override
@@ -13,8 +12,8 @@ class LoadingWidget extends StatelessWidget {
   }
 
   _buildBody(BuildContext context) {
-    return SpinKitWave(
-      color: Theme.of(context).accentColor,
+    return SpinKitFadingCircle(
+      color: Colors.cyanAccent,
     );
   }
 }

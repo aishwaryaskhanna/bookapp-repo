@@ -68,44 +68,7 @@ class _DownloadAlertState extends State<DownloadAlert> {
                 overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 20.0),
-              Container(
-                height: 5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: LinearProgressIndicator(
-                  value: double.parse(progress) / 100.0,
-                  valueColor:
-                      AlwaysStoppedAnimation(Theme.of(context).accentColor),
-                  backgroundColor:
-                      Theme.of(context).accentColor.withOpacity(0.3),
-                ),
-              ),
-              SizedBox(height: 5.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    '$progress %',
-                    style: TextStyle(
-                      fontSize: 13.0,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '${Constants.formatBytes(received, 1)} '
-                    'of ${Constants.formatBytes(total, 1)}',
-                    style: TextStyle(
-                      fontSize: 13.0,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
+              CircularProgressIndicator(),
             ],
           ),
         ),

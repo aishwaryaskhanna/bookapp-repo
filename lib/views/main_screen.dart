@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/util/dialogs.dart';
-import 'package:book_app/views/home.dart';
-import 'package:book_app/views/settings.dart';
+import 'package:book_app/views/home_page.dart';
+import 'package:book_app/views/options.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class MainScreen extends StatefulWidget {
@@ -29,14 +29,14 @@ class _MainScreenState extends State<MainScreen> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
-          selectedItemColor: Theme.of(context).accentColor,
+          selectedItemColor: Colors.cyanAccent,
           unselectedItemColor: Colors.grey[500],
           elevation: 20,
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
-                Feather.home,
+                Feather.book_open,
               ),
               title: Text(
                 'Home',

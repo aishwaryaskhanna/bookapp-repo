@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:book_app/components/body_builder.dart';
 import 'package:book_app/components/book_list_item.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/view_models/genre_provider.dart';
+import 'package:book_app/view_models/category_provider.dart';
 import 'package:provider/provider.dart';
 
 class Genre extends StatefulWidget {
@@ -25,7 +25,7 @@ class _GenreState extends State<Genre> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
-      (_) => Provider.of<GenreProvider>(context, listen: false)
+      (_) => Provider.of<CategoryProvider>(context, listen: false)
           .getFeed(widget.url),
     );
   }
@@ -33,7 +33,7 @@ class _GenreState extends State<Genre> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (BuildContext context, GenreProvider provider, Widget child) {
+      builder: (BuildContext context, CategoryProvider provider, Widget child) {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -45,7 +45,7 @@ class _GenreState extends State<Genre> {
     );
   }
 
-  Widget _buildBody(GenreProvider provider) {
+  Widget _buildBody(CategoryProvider provider) {
     return BodyBuilder(
       apiRequestStatus: provider.apiRequestStatus,
       child: _buildBodyList(provider),
@@ -53,7 +53,7 @@ class _GenreState extends State<Genre> {
     );
   }
 
-  _buildBodyList(GenreProvider provider) {
+  _buildBodyList(CategoryProvider provider) {
     return ListView(
       controller: provider.controller,
       children: <Widget>[

@@ -6,7 +6,7 @@ import 'package:book_app/util/api_request_status.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../models/category.dart';
 
-class GenreProvider extends ChangeNotifier {
+class CategoryProvider extends ChangeNotifier {
   ScrollController controller = ScrollController();
   List items = List();
   int page = 1;
@@ -70,16 +70,6 @@ class GenreProvider extends ChangeNotifier {
       }
     }
   }
-
-  /*void checkError(e) {
-    if (Functions.checkConnectionError(e)) {
-      setApiRequestStatus(APIRequestStatus.connectionError);
-      showToast('Connection error');
-    } else {
-      setApiRequestStatus(APIRequestStatus.error);
-      showToast('Something went wrong, please try again');
-    }
-  }*/
 
   showToast(msg) {
     Fluttertoast.showToast(

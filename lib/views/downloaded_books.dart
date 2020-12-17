@@ -116,30 +116,6 @@ class _DownloadsState extends State<Downloads> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'COMPLETED',
-                              style: TextStyle(
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).accentColor,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              dl['size'],
-                              style: TextStyle(
-                                fontSize: 13.0,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
