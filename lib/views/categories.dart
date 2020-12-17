@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:book_app/components/widget_creator.dart';
-import 'package:book_app/components/book_list_item.dart';
+import 'package:book_app/components/book_list_entry.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/models/category_model.dart';
 import 'package:provider/provider.dart';
