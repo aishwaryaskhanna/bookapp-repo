@@ -39,50 +39,42 @@ class _GenreState extends State<Genre> {
             centerTitle: true,
             title: Text('${widget.title}'),
           ),
-          body: _buildBody(provider),
+          body: BodyBuilder(
+            response: provider.apiRequestStatus,
+            child: ListView(
+              controller: provider.controller,
+              children: <Widget>[
+                ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  shrinkWrap: true,
+                  itemCount: provider.items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Entry entry = provider.items[index];
+                    return Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: BookListItem(
+                        bookCover: entry.link[1].href,
+                        title: entry.title.t,
+                        author: entry.author.name.t,
+                        entry: entry,
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 10.0),
+                provider.loadingMore
+                    ? Container(
+                        height: 80.0,
+                        child: CircularProgressIndicator(),
+                      )
+                    : SizedBox(),
+              ],
+            ),
+            reload: () => provider.getFeed(widget.url),
+          ),
         );
       },
-    );
-  }
-
-  Widget _buildBody(CategoryProvider provider) {
-    return BodyBuilder(
-      response: provider.apiRequestStatus,
-      child: _buildBodyList(provider),
-      reload: () => provider.getFeed(widget.url),
-    );
-  }
-
-  _buildBodyList(CategoryProvider provider) {
-    return ListView(
-      controller: provider.controller,
-      children: <Widget>[
-        ListView.builder(
-          physics: ClampingScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          shrinkWrap: true,
-          itemCount: provider.items.length,
-          itemBuilder: (BuildContext context, int index) {
-            Entry entry = provider.items[index];
-            return Padding(
-              padding: EdgeInsets.all(5.0),
-              child: BookListItem(
-                img: entry.link[1].href,
-                title: entry.title.t,
-                author: entry.author.name.t,
-                entry: entry,
-              ),
-            );
-          },
-        ),
-        SizedBox(height: 10.0),
-        provider.loadingMore
-            ? Container(
-                height: 80.0,
-                child: CircularProgressIndicator(),
-              )
-            : SizedBox(),
-      ],
     );
   }
 }

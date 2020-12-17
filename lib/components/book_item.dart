@@ -7,19 +7,19 @@ import 'package:uuid/uuid.dart';
 import '../views/book_page.dart';
 
 class BookItem extends StatelessWidget {
-  final String img;
-  final String title;
+  final String bookCover;
+  final String bookTitle;
   final Entry entry;
 
   BookItem({
     Key key,
-    @required this.img,
-    @required this.title,
-    @required this.entry,
+    this.bookCover,
+    this.bookTitle,
+    this.entry,
   }) : super(key: key);
 
   static final uuid = Uuid();
-  final String imgTag = uuid.v4();
+  final String coverTag = uuid.v4();
   final String titleTag = uuid.v4();
   final String authorTag = uuid.v4();
 
@@ -31,7 +31,7 @@ class BookItem extends StatelessWidget {
           context,
           Details(
             entry: entry,
-            imgTag: imgTag,
+            imgTag: coverTag,
             titleTag: titleTag,
             authorTag: authorTag,
           ),
@@ -44,14 +44,11 @@ class BookItem extends StatelessWidget {
               Radius.circular(10.0),
             ),
             child: Hero(
-              tag: imgTag,
+              tag: coverTag,
               child: CachedNetworkImage(
-                imageUrl: '$img',
+                imageUrl: '$bookCover',
                 placeholder: (context, url) => ProgressWidget(),
-                errorWidget: (context, url, error) => Image.asset(
-                  'assets/images/place.png',
-                  fit: BoxFit.cover,
-                ),
+                errorWidget: (context, url, error) => Text('Unavailable'),
                 fit: BoxFit.cover,
                 height: 150.0,
               ),
@@ -63,7 +60,7 @@ class BookItem extends StatelessWidget {
             child: Material(
               type: MaterialType.transparency,
               child: Text(
-                '${title.replaceAll(r'\', '')}',
+                '${bookTitle.replaceAll(r'\', '')}',
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold,

@@ -56,10 +56,7 @@ class BookCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: '$img',
                 placeholder: (context, url) => ProgressWidget(),
-                errorWidget: (context, url, error) => Image.asset(
-                  'assets/images/place.png',
-                  fit: BoxFit.cover,
-                ),
+                errorWidget: (context, url, error) => Text('Unavailable'),
                 fit: BoxFit.cover,
               ),
             ),

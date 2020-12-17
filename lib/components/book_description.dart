@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class DescriptionTextWidget extends StatefulWidget {
+class BookDescriptionWidget extends StatefulWidget {
   final String text;
 
-  DescriptionTextWidget({@required this.text});
+  BookDescriptionWidget({@required this.text});
 
   @override
-  _DescriptionTextWidgetState createState() => _DescriptionTextWidgetState();
+  _BookDescriptionWidgetState createState() => _BookDescriptionWidgetState();
 }
 
-class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
+class _BookDescriptionWidgetState extends State<BookDescriptionWidget> {
   String description;
   @override
   void initState() {

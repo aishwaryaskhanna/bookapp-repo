@@ -50,13 +50,8 @@ class _LikedBooksState extends State<LikedBooks> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Image.asset(
-                        'assets/images/empty.png',
-                        height: 300.0,
-                        width: 300.0,
-                      ),
                       Text(
-                        'Nothing is here',
+                        'No liked items yet.',
                         style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
@@ -79,8 +74,8 @@ class _LikedBooksState extends State<LikedBooks> {
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.0),
                       child: BookItem(
-                        img: entry.link[1].href,
-                        title: entry.title.t,
+                        bookCover: entry.link[1].href,
+                        bookTitle: entry.title.t,
                         entry: entry,
                       ),
                     );

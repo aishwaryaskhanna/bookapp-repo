@@ -25,7 +25,7 @@ class BookPageProvider extends ChangeNotifier {
 
   getFeed(String url) async {
     setLoading(true);
-    checkFav();
+    checkIfLiked();
     checkDownload();
     try {
       CategoryFeed feed = await api.getCategory(url);
@@ -36,8 +36,7 @@ class BookPageProvider extends ChangeNotifier {
     }
   }
 
-  // check if book is favorited
-  checkFav() async {
+  checkIfLiked() async {
     List c = await favDB.isLiked({'id': entry.id.t.toString()});
     if (c.isNotEmpty) {
       setFaved(true);
@@ -46,16 +45,16 @@ class BookPageProvider extends ChangeNotifier {
     }
   }
 
-  addFav() async {
+  addtoLiked() async {
     await favDB
         .addToLiked({'id': entry.id.t.toString(), 'item': entry.toJson()});
-    checkFav();
+    checkIfLiked();
   }
 
-  removeFav() async {
+  removeFromLiked() async {
     favDB.removeFromLiked({'id': entry.id.t.toString()}).then((v) {
       print(v);
-      checkFav();
+      checkIfLiked();
     });
   }
 

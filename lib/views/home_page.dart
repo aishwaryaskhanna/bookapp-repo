@@ -37,109 +37,95 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               ),
             ),
           ),
-          body: _buildBody(homeProvider),
-        );
-      },
-    );
-  }
-
-  Widget _buildBody(HomePageProvider homeProvider) {
-    return BodyBuilder(
-      response: homeProvider.response,
-      child: _buildBodyList(homeProvider),
-      reload: () => homeProvider.getFeeds(),
-    );
-  }
-
-  Widget _buildBodyList(HomePageProvider homeProvider) {
-    return RefreshIndicator(
-      onRefresh: () => homeProvider.getFeeds(),
-      child: ListView(
-        children: <Widget>[
-          SizedBox(height: 25.0),
-          _buildSectionTitle('Explore Categories'),
-          SizedBox(height: 60.0),
-          _buildGenreSection(homeProvider),
-          SizedBox(height: 20.0),
-        ],
-      ),
-    );
-  }
-
-  _buildSectionTitle(String title) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            '$title',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildGenreSection(HomePageProvider homeProvider) {
-    return Container(
-      height: 420.0,
-      child: Center(
-        child: ListView.builder(
-          primary: false,
-          padding: EdgeInsets.symmetric(horizontal: 70.0),
-          scrollDirection: Axis.vertical,
-          itemCount: homeProvider?.top?.feed?.link?.length ?? 0,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            Link link = homeProvider.top.feed.link[index];
-            if (index < 10) {
-              return SizedBox();
-            }
-
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              child: Container(
-                height: 50.0,
-                decoration: BoxDecoration(
-                  color: Colors.cyan[600],
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20.0),
-                  ),
-                ),
-                child: InkWell(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20.0),
-                  ),
-                  onTap: () {
-                    PageRouter.pushPage(
-                      context,
-                      Genre(
-                        title: '${link.title}',
-                        url: link.href,
-                      ),
-                    );
-                  },
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        '${link.title}',
-                        style: TextStyle(
-                          color: Colors.white,
+          body: BodyBuilder(
+            response: homeProvider.response,
+            child: RefreshIndicator(
+              onRefresh: () => homeProvider.getFeeds(),
+              child: ListView(
+                children: <Widget>[
+                  SizedBox(height: 25.0),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Explore Categories',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 60.0),
+                  Container(
+                    height: 420.0,
+                    child: Center(
+                      child: ListView.builder(
+                        primary: false,
+                        padding: EdgeInsets.symmetric(horizontal: 70.0),
+                        scrollDirection: Axis.vertical,
+                        itemCount: homeProvider?.top?.feed?.link?.length ?? 0,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          Link link = homeProvider.top.feed.link[index];
+                          if (index < 10) {
+                            return SizedBox();
+                          }
+
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 5.0),
+                            child: Container(
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: Colors.cyan[600],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0),
+                                ),
+                              ),
+                              child: InkWell(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0),
+                                ),
+                                onTap: () {
+                                  PageRouter.pushPage(
+                                    context,
+                                    Genre(
+                                      title: '${link.title}',
+                                      url: link.href,
+                                    ),
+                                  );
+                                },
+                                child: Center(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: Text(
+                                      '${link.title}',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
-                ),
+                  SizedBox(height: 20.0),
+                ],
               ),
-            );
-          },
-        ),
-      ),
+            ),
+            reload: () => homeProvider.getFeeds(),
+          ),
+        );
+      },
     );
   }
 

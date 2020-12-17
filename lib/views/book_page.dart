@@ -53,10 +53,148 @@ class _DetailsState extends State<Details> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             children: <Widget>[
               SizedBox(height: 10.0),
-              _buildImageTitleSection(detailsProvider),
+              Container(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Hero(
+                      tag: widget.imgTag,
+                      child: CachedNetworkImage(
+                        imageUrl: '${widget.entry.link[1].href}',
+                        placeholder: (context, url) => Container(
+                          height: 200.0,
+                          width: 130.0,
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Feather.x),
+                        fit: BoxFit.cover,
+                        height: 200.0,
+                        width: 130.0,
+                      ),
+                    ),
+                    SizedBox(width: 20.0),
+                    Flexible(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(height: 5.0),
+                          Hero(
+                            tag: widget.titleTag,
+                            child: Material(
+                              type: MaterialType.transparency,
+                              child: Text(
+                                '${widget.entry.title.t.replaceAll(r'\', '')}',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 3,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Hero(
+                            tag: widget.authorTag,
+                            child: Material(
+                              type: MaterialType.transparency,
+                              child: Text(
+                                '${widget.entry.author.name.t}',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                                height: 210.0,
+                                width: MediaQuery.of(context).size.width,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 5.0),
+                                    Center(
+                                      child: Container(
+                                        height: 20.0,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: _createDownloadButton(
+                                            detailsProvider, context),
+                                      ),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    Center(
+                                      child: Container(
+                                        height: 20.0,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: IconButton(
+                                          onPressed: () async {
+                                            if (detailsProvider.faved) {
+                                              detailsProvider.removeFromLiked();
+                                            } else {
+                                              detailsProvider.addtoLiked();
+                                            }
+                                          },
+                                          icon: Icon(
+                                            detailsProvider.faved
+                                                ? Icons.favorite
+                                                : Feather.heart,
+                                            color: detailsProvider.faved
+                                                ? Colors.red
+                                                : Theme.of(context)
+                                                    .iconTheme
+                                                    .color,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 20.0),
+                                    Center(
+                                      child: Container(
+                                        height: 50.0,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: IconButton(
+                                          onPressed: () => Share.text(
+                                            'Share "${widget.entry.title.t}" with',
+                                            'Glad to share the book "${widget.entry.title.t}" with you! Get it now from ${widget.entry.link[3].href}.',
+                                            'text/plain',
+                                          ),
+                                          icon: Icon(
+                                            Feather.share_2,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(height: 30.0),
-              _buildSectionTitle('Description'),
-              _buildDivider(),
+              Text(
+                'Description',
+                style: TextStyle(
+                  color: Colors.cyanAccent,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Divider(
+                color: Theme.of(context).textTheme.caption.color,
+              ),
               SizedBox(height: 10.0),
               Text(
                 '${widget.entry.summary.t}'
@@ -68,156 +206,10 @@ class _DetailsState extends State<Details> {
                   color: Theme.of(context).textTheme.caption.color,
                 ),
               ),
-              //DescriptionTextWidget(
-              //text: '${widget.entry.summary.t}',
-              //),
             ],
           ),
         );
       },
-    );
-  }
-
-  _buildDivider() {
-    return Divider(
-      color: Theme.of(context).textTheme.caption.color,
-    );
-  }
-
-  _buildImageTitleSection(BookPageProvider detailsProvider) {
-    return Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Hero(
-            tag: widget.imgTag,
-            child: CachedNetworkImage(
-              imageUrl: '${widget.entry.link[1].href}',
-              placeholder: (context, url) => Container(
-                height: 200.0,
-                width: 130.0,
-                child: CircularProgressIndicator(),
-              ),
-              errorWidget: (context, url, error) => Icon(Feather.x),
-              fit: BoxFit.cover,
-              height: 200.0,
-              width: 130.0,
-            ),
-          ),
-          SizedBox(width: 20.0),
-          Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 5.0),
-                Hero(
-                  tag: widget.titleTag,
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: Text(
-                      '${widget.entry.title.t.replaceAll(r'\', '')}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 3,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5.0),
-                Hero(
-                  tag: widget.authorTag,
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: Text(
-                      '${widget.entry.author.name.t}',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-                //SizedBox(height: 5.0),
-                Center(
-                  child: Container(
-                      height: 210.0,
-                      width: MediaQuery.of(context).size.width,
-                      //child: _buildDownloadReadButton(detailsProvider, context),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(height: 5.0),
-                          Center(
-                            child: Container(
-                              height: 20.0,
-                              width: MediaQuery.of(context).size.width,
-                              child: _buildDownloadReadButton(
-                                  detailsProvider, context),
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
-                          Center(
-                            child: Container(
-                              height: 20.0,
-                              width: MediaQuery.of(context).size.width,
-                              child: IconButton(
-                                onPressed: () async {
-                                  if (detailsProvider.faved) {
-                                    detailsProvider.removeFav();
-                                  } else {
-                                    detailsProvider.addFav();
-                                  }
-                                },
-                                icon: Icon(
-                                  detailsProvider.faved
-                                      ? Icons.favorite
-                                      : Feather.heart,
-                                  color: detailsProvider.faved
-                                      ? Colors.red
-                                      : Theme.of(context).iconTheme.color,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20.0),
-                          Center(
-                            child: Container(
-                              height: 50.0,
-                              width: MediaQuery.of(context).size.width,
-                              child: IconButton(
-                                onPressed: () => _share(),
-                                icon: Icon(
-                                  Feather.share_2,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildSectionTitle(String title) {
-    return Text(
-      '$title',
-      style: TextStyle(
-        color: Colors.cyanAccent, //Theme.of(context).accentColor
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
-      ),
     );
   }
 
@@ -250,7 +242,7 @@ class _DetailsState extends State<Details> {
     }
   }
 
-  _buildDownloadReadButton(BookPageProvider provider, BuildContext context) {
+  _createDownloadButton(BookPageProvider provider, BuildContext context) {
     if (provider.downloaded) {
       return FlatButton(
         onPressed: () => openBook(provider),
@@ -276,13 +268,5 @@ class _DetailsState extends State<Details> {
         ),
       );
     }
-  }
-
-  _share() {
-    Share.text(
-      'Share "${widget.entry.title.t}" with',
-      'Glad to share the book "${widget.entry.title.t}" with you! Get it now from ${widget.entry.link[3].href}.',
-      'text/plain',
-    );
   }
 }

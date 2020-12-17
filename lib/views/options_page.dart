@@ -19,12 +19,12 @@ class _ProfileState extends State<Profile> {
       {
         'icon': Feather.heart,
         'title': 'Liked Books',
-        'function': () => _pushPage(LikedBooks()),
+        'function': () => PageRouter.pushPage(context, LikedBooks()),
       },
       {
         'icon': Feather.download,
         'title': 'Downloaded Books',
-        'function': () => _pushPage(Downloads()),
+        'function': () => PageRouter.pushPage(context, Downloads()),
       },
     ];
   }
@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
       body: ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: 10),
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: ClampingScrollPhysics(),
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
@@ -59,9 +59,5 @@ class _ProfileState extends State<Profile> {
         },
       ),
     );
-  }
-
-  _pushPage(Widget page) {
-    PageRouter.pushPage(context, page);
   }
 }

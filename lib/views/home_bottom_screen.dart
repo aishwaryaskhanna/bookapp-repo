@@ -51,14 +51,14 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
           ],
-          onTap: navigationTapped,
+          onTap: jumpToPage,
           currentIndex: _page,
         ),
       ),
     );
   }
 
-  void navigationTapped(int page) {
+  void jumpToPage(int page) {
     _pageController.jumpToPage(page);
   }
 

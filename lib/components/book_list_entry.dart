@@ -7,14 +7,14 @@ import 'package:uuid/uuid.dart';
 import '../views/book_page.dart';
 
 class BookListItem extends StatelessWidget {
-  final String img;
+  final String bookCover;
   final String title;
   final String author;
   final Entry entry;
 
   BookListItem({
     Key key,
-    @required this.img,
+    @required this.bookCover,
     @required this.title,
     @required this.author,
     @required this.entry,
@@ -59,18 +59,13 @@ class BookListItem extends StatelessWidget {
                 child: Hero(
                   tag: imgTag,
                   child: CachedNetworkImage(
-                    imageUrl: '$img',
+                    imageUrl: '$bookCover',
                     placeholder: (context, url) => Container(
                       height: 150.0,
                       width: 100.0,
                       child: ProgressWidget(),
                     ),
-                    errorWidget: (context, url, error) => Image.asset(
-                      'assets/images/place.png',
-                      fit: BoxFit.cover,
-                      height: 150.0,
-                      width: 100.0,
-                    ),
+                    errorWidget: (context, url, error) => Text('Unavailable'),
                     fit: BoxFit.cover,
                     height: 150.0,
                     width: 100.0,

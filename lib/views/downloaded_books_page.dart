@@ -41,140 +41,119 @@ class _DownloadsState extends State<Downloads> {
         centerTitle: true,
         title: Text('Downloads'),
       ),
-      body: dls.isEmpty ? _buildEmptyListView() : _buildBodyList(),
-    );
-  }
-
-  _buildBodyList() {
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: dls.length,
-      itemBuilder: (BuildContext context, int index) {
-        Map dl = dls[index];
-
-        return Dismissible(
-          key: ObjectKey(uuid.v4()),
-          direction: DismissDirection.endToStart,
-          background: _dismissibleBackground(),
-          onDismissed: (d) => _deleteBook(dl, index),
-          child: InkWell(
-            onTap: () async {
-              String path = dl['path'];
-              List locators = await LocatorDB().getLocator(dl['id']);
-
-              EpubViewer.setConfig(
-                identifier: 'androidBook',
-                themeColor: Theme.of(context).accentColor,
-                scrollDirection: EpubScrollDirection.VERTICAL,
-                enableTts: false,
-                allowSharing: true,
-              );
-              EpubViewer.open(path,
-                  lastLocation: locators.isNotEmpty
-                      ? EpubLocator.fromJson(locators[0])
-                      : null);
-              EpubViewer.locatorStream.listen((event) async {
-                // Get locator here
-                Map json = jsonDecode(event);
-                json['bookId'] = dl['id'];
-                // Save locator to your database
-                await LocatorDB().update(json);
-              });
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-              child: Row(
+      body: dls.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CachedNetworkImage(
-                    imageUrl: dl['image'],
-                    placeholder: (context, url) => Container(
-                      height: 70.0,
-                      width: 70.0,
-                      child: ProgressWidget(),
-                    ),
-                    errorWidget: (context, url, error) => Image.asset(
-                      'assets/images/place.png',
-                      fit: BoxFit.cover,
-                      height: 70.0,
-                      width: 70.0,
-                    ),
-                    fit: BoxFit.cover,
-                    height: 70.0,
-                    width: 70.0,
-                  ),
-                  SizedBox(width: 10.0),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          dl['name'],
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                  Text(
+                    'No downloaded items yet.',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return Divider();
-      },
-    );
-  }
+            )
+          : ListView.separated(
+              shrinkWrap: true,
+              itemCount: dls.length,
+              itemBuilder: (BuildContext context, int index) {
+                Map dl = dls[index];
 
-  _buildEmptyListView() {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Image.asset(
-            'assets/images/empty.png',
-            height: 300.0,
-            width: 300.0,
-          ),
-          Text(
-            'Nothing is here',
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+                return Dismissible(
+                  key: ObjectKey(uuid.v4()),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 20.0),
+                    color: Colors.red,
+                    child: Icon(
+                      Feather.trash_2,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDismissed: (d) => _deleteBook(dl, index),
+                  child: InkWell(
+                    onTap: () async {
+                      String path = dl['path'];
+                      List locators = await LocatorDB().getLocator(dl['id']);
 
-  _dismissibleBackground() {
-    return Container(
-      alignment: Alignment.centerRight,
-      padding: EdgeInsets.only(right: 20.0),
-      color: Colors.red,
-      child: Icon(
-        Feather.trash_2,
-        color: Colors.white,
-      ),
+                      EpubViewer.setConfig(
+                        identifier: 'androidBook',
+                        themeColor: Theme.of(context).accentColor,
+                        scrollDirection: EpubScrollDirection.VERTICAL,
+                        enableTts: false,
+                        allowSharing: true,
+                      );
+                      EpubViewer.open(path,
+                          lastLocation: locators.isNotEmpty
+                              ? EpubLocator.fromJson(locators[0])
+                              : null);
+                      EpubViewer.locatorStream.listen((event) async {
+                        // Get locator here
+                        Map json = jsonDecode(event);
+                        json['bookId'] = dl['id'];
+                        // Save locator to your database
+                        await LocatorDB().update(json);
+                      });
+                    },
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Row(
+                        children: <Widget>[
+                          CachedNetworkImage(
+                            imageUrl: dl['image'],
+                            placeholder: (context, url) => Container(
+                              height: 70.0,
+                              width: 70.0,
+                              child: ProgressWidget(),
+                            ),
+                            fit: BoxFit.cover,
+                            height: 70.0,
+                            width: 70.0,
+                          ),
+                          SizedBox(width: 10.0),
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  dl['name'],
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider();
+              },
+            ),
     );
   }
 
   _deleteBook(Map dl, int index) {
     db.remove({'id': dl['id']}).then((v) async {
-      File f = File(dl['path']);
-      if (await f.exists()) {
-        f.delete();
+      File bookFile = File(dl['path']);
+      if (await bookFile.exists()) {
+        bookFile.delete();
       }
       setState(() {
         dls.removeAt(index);
       });
-      print('done');
     });
   }
 }
