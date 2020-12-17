@@ -16,17 +16,9 @@ class Dialogs {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              SizedBox(height: 15.0),
-              Text(
-                Constants.appName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                ),
-              ),
               SizedBox(height: 25.0),
               Text(
-                'Are you sure you want to quit?',
+                'Press OK to exit the app.',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14.0,
@@ -46,7 +38,7 @@ class Dialogs {
                       borderSide:
                           BorderSide(color: Theme.of(context).accentColor),
                       child: Text(
-                        'No',
+                        'Cancel',
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                         ),
@@ -63,7 +55,7 @@ class Dialogs {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                       child: Text(
-                        'Yes',
+                        'OK',
                         style: TextStyle(
                           color: Colors.white,
                         ),

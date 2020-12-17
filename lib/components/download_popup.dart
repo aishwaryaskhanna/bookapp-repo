@@ -1,39 +1,39 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/custom_alert.dart';
+import 'package:book_app/util/consts.dart';
 
-class DownloadModal extends StatefulWidget {
-  final String bookUrl;
+class DownloadPopup extends StatefulWidget {
+  final String url;
   final String path;
 
-  DownloadModal({Key key, this.bookUrl, this.path}) : super(key: key);
+  DownloadPopup({Key key, @required this.url, @required this.path})
+      : super(key: key);
 
   @override
-  _DownloadModalState createState() => _DownloadModalState();
+  _DownloadPopupState createState() => _DownloadPopupState();
 }
 
-class _DownloadModalState extends State<DownloadModal> {
+class _DownloadPopupState extends State<DownloadPopup> {
   Dio dio = new Dio();
-  int receivedBytes = 0;
-  int totalBytes = 0;
-  String downloadProgress = '0';
+  int received = 0;
+  String progress = '0';
+  int total = 0;
 
-  startDownload() async {
+  download() async {
     await dio.download(
-      widget.bookUrl,
+      widget.url,
       widget.path,
       deleteOnError: true,
-      onReceiveProgress: (received, total) {
+      onReceiveProgress: (receivedBytes, totalBytes) {
         setState(() {
-          receivedBytes = received;
-          totalBytes = total;
-          downloadProgress =
-              (receivedBytes / totalBytes * 100).toStringAsFixed(0);
+          received = receivedBytes;
+          total = totalBytes;
+          progress = (received / total * 100).toStringAsFixed(0);
         });
 
-        if (received == total) {
-          print("Complete.");
-          Navigator.pop(context);
+        if (receivedBytes == totalBytes) {
+          Navigator.pop(context, '${Constants.formatBytes(total, 1)}');
         }
       },
     );
@@ -42,7 +42,7 @@ class _DownloadModalState extends State<DownloadModal> {
   @override
   void initState() {
     super.initState();
-    startDownload();
+    download();
   }
 
   @override
@@ -60,11 +60,13 @@ class _DownloadModalState extends State<DownloadModal> {
               Text(
                 'Downloading the book..',
                 style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 18.0),
+              SizedBox(height: 20.0),
               CircularProgressIndicator(
                 valueColor:
                     new AlwaysStoppedAnimation<Color>(Colors.cyanAccent),

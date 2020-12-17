@@ -1,9 +1,6 @@
 import 'dart:math';
 
 class Constants {
-  //App related strings
-  static String appName = 'Book App';
-
   static formatBytes(bytes, decimals) {
     if (bytes == 0) return 0.0;
     var k = 1024,
