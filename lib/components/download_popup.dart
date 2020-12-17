@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/custom_alert.dart';
-import 'package:book_app/util/consts.dart';
+import 'package:book_app/util/formatter.dart';
 
 class DownloadPopup extends StatefulWidget {
   final String url;
@@ -33,7 +33,7 @@ class _DownloadPopupState extends State<DownloadPopup> {
         });
 
         if (receivedBytes == totalBytes) {
-          Navigator.pop(context, '${Constants.formatBytes(total, 1)}');
+          Navigator.pop(context, '${ByteFormatter.formatBytes(total, 1)}');
         }
       },
     );

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/progress_widget.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/util/router.dart';
+import 'package:book_app/util/page_router.dart';
 import 'package:uuid/uuid.dart';
 import '../views/book_page.dart';
 
@@ -37,7 +37,7 @@ class BookCard extends StatelessWidget {
             Radius.circular(10.0),
           ),
           onTap: () {
-            MyRouter.pushPage(
+            PageRouter.pushPage(
               context,
               Details(
                 entry: entry,

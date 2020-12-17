@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:book_app/components/widget_creator.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/util/consts.dart';
-import 'package:book_app/util/router.dart';
+import 'package:book_app/util/page_router.dart';
 import 'package:book_app/view_models/home_provider.dart';
 import 'package:book_app/views/categories.dart';
 import 'package:provider/provider.dart';
@@ -116,7 +115,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                     Radius.circular(20.0),
                   ),
                   onTap: () {
-                    MyRouter.pushPage(
+                    PageRouter.pushPage(
                       context,
                       Genre(
                         title: '${link.title}',

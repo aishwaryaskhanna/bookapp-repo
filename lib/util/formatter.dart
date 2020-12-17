@@ -1,6 +1,6 @@
 import 'dart:math';
 
-class Constants {
+class ByteFormatter {
   static formatBytes(bytes, decimals) {
     if (bytes == 0) return 0.0;
     var k = 1024,
