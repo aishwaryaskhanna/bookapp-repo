@@ -5,25 +5,25 @@ import 'package:book_app/models/category.dart';
 import 'package:book_app/view_models/liked_books_model.dart';
 import 'package:provider/provider.dart';
 
-class Favorites extends StatefulWidget {
+class LikedBooks extends StatefulWidget {
   @override
-  _FavoritesState createState() => _FavoritesState();
+  _LikedBooksState createState() => _LikedBooksState();
 }
 
-class _FavoritesState extends State<Favorites> {
+class _LikedBooksState extends State<LikedBooks> {
   @override
   void initState() {
     super.initState();
-    getFavorites();
+    getLikedBooks();
   }
 
   @override
   void deactivate() {
     super.deactivate();
-    getFavorites();
+    getLikedBooks();
   }
 
-  getFavorites() {
+  getLikedBooks() {
     SchedulerBinding.instance.addPostFrameCallback(
       (_) {
         if (mounted) {

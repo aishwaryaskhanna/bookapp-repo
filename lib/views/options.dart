@@ -19,7 +19,7 @@ class _ProfileState extends State<Profile> {
       {
         'icon': Feather.heart,
         'title': 'Liked Books',
-        'function': () => _pushPage(Favorites()),
+        'function': () => _pushPage(LikedBooks()),
       },
       {
         'icon': Feather.download,
