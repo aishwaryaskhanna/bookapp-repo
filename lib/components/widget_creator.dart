@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/components/progress_widget.dart';
-import 'package:book_app/util/api_request_status.dart';
+import 'package:book_app/utility/response.dart';
 
 class BodyBuilder extends StatelessWidget {
-  final APIRequestStatus response;
+  final Response response;
   final Widget child;
   final Function reload;
 
@@ -12,7 +12,7 @@ class BodyBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (response == APIRequestStatus.loaded)
+    if (response == Response.loaded)
       return child;
     else
       return ProgressWidget();

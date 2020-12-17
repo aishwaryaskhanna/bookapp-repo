@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/custom_alert.dart';
 
-class Dialogs {
+class ExitPopup {
   showExitDialog(BuildContext context) {
     showDialog(
       context: context,

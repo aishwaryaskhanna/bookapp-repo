@@ -1,27 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/util/api.dart';
-import 'package:book_app/util/api_request_status.dart';
+import 'package:book_app/utility/feedbooks_api.dart';
+import 'package:book_app/utility/response.dart';
 
 class HomePageProvider with ChangeNotifier {
   CategoryFeed top = CategoryFeed();
   CategoryFeed recent = CategoryFeed();
-  APIRequestStatus response = APIRequestStatus.loading;
-  Api api = Api();
+  Response response = Response.loading;
+  FeedbooksAPI api = FeedbooksAPI();
 
   getFeeds() async {
-    setApiRequestStatus(APIRequestStatus.loading);
+    setApiRequestStatus(Response.loading);
     try {
-      CategoryFeed popular = await api.getCategory(Api.popular);
+      CategoryFeed popular = await api.getCategory(FeedbooksAPI.popular);
       setTop(popular);
-      CategoryFeed newReleases = await api.getCategory(Api.noteworthy);
+      CategoryFeed newReleases = await api.getCategory(FeedbooksAPI.noteworthy);
       setRecent(newReleases);
-      setApiRequestStatus(APIRequestStatus.loaded);
+      setApiRequestStatus(Response.loaded);
     } catch (e) {}
   }
 
-  void setApiRequestStatus(APIRequestStatus value) {
+  void setApiRequestStatus(Response value) {
     response = value;
     notifyListeners();
   }

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:book_app/models/category.dart';
 import 'package:xml2json/xml2json.dart';
 
-class Api {
+class FeedbooksAPI {
   Dio dio = Dio();
   static String baseURL = 'https://catalog.feedbooks.com';
   static String publicDomainURL = '$baseURL/publicdomain/browse';

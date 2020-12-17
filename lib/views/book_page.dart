@@ -4,7 +4,7 @@ import 'package:epub_viewer/epub_viewer.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:book_app/database/locator_helper.dart';
+import 'package:book_app/helper/locator_helper.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/models/book_page_model.dart';
 import 'package:flutter_icons/flutter_icons.dart';

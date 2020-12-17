@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:book_app/util/api.dart';
-import 'package:book_app/util/api_request_status.dart';
+import 'package:book_app/utility/feedbooks_api.dart';
+import 'package:book_app/utility/response.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'category.dart';
 
@@ -12,8 +12,8 @@ class CategoryProvider extends ChangeNotifier {
   int page = 1;
   bool loadingMore = false;
   bool loadMore = true;
-  APIRequestStatus apiRequestStatus = APIRequestStatus.loading;
-  Api api = Api();
+  Response apiRequestStatus = Response.loading;
+  FeedbooksAPI api = FeedbooksAPI();
 
   listener(url) {
     controller.addListener(() {
@@ -34,12 +34,12 @@ class CategoryProvider extends ChangeNotifier {
   }
 
   getFeed(String url) async {
-    setApiRequestStatus(APIRequestStatus.loading);
+    setApiRequestStatus(Response.loading);
     print(url);
     try {
       CategoryFeed feed = await api.getCategory(url);
       items = feed.feed.entry;
-      setApiRequestStatus(APIRequestStatus.loaded);
+      setApiRequestStatus(Response.loaded);
       listener(url);
     } catch (e) {
       //checkError(e);
@@ -48,9 +48,7 @@ class CategoryProvider extends ChangeNotifier {
   }
 
   paginate(String url) async {
-    if (apiRequestStatus != APIRequestStatus.loading &&
-        !loadingMore &&
-        loadMore) {
+    if (apiRequestStatus != Response.loading && !loadingMore && loadMore) {
       Timer(Duration(milliseconds: 100), () {
         controller.jumpTo(controller.position.maxScrollExtent);
       });
@@ -79,7 +77,7 @@ class CategoryProvider extends ChangeNotifier {
     );
   }
 
-  void setApiRequestStatus(APIRequestStatus value) {
+  void setApiRequestStatus(Response value) {
     apiRequestStatus = value;
     notifyListeners();
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:book_app/util/dialogs.dart';
+import 'package:book_app/components/exit_popup.dart';
 import 'package:book_app/views/home_page.dart';
 import 'package:book_app/views/options.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => Dialogs().showExitDialog(context),
+      onWillPop: () => ExitPopup().showExitDialog(context),
       child: Scaffold(
         body: PageView(
           physics: ClampingScrollPhysics(),

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/download_popup.dart';
-import 'package:book_app/database/download_helper.dart';
-import 'package:book_app/database/liked_books_helper.dart';
+import 'package:book_app/helper/download_helper.dart';
+import 'package:book_app/helper/liked_books_helper.dart';
 import 'package:book_app/models/category.dart';
-import 'package:book_app/util/api.dart';
+import 'package:book_app/utility/feedbooks_api.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -21,7 +21,7 @@ class BookPageProvider extends ChangeNotifier {
 
   bool faved = false;
   bool downloaded = false;
-  Api api = Api();
+  FeedbooksAPI api = FeedbooksAPI();
 
   getFeed(String url) async {
     setLoading(true);

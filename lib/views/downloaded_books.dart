@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epub_viewer/epub_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/progress_widget.dart';
-import 'package:book_app/database/download_helper.dart';
-import 'package:book_app/database/locator_helper.dart';
+import 'package:book_app/helper/download_helper.dart';
+import 'package:book_app/helper/locator_helper.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:uuid/uuid.dart';
 

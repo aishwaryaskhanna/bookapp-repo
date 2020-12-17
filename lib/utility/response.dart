@@ -1,4 +1,4 @@
-enum APIRequestStatus {
+enum Response {
   unInitialized,
   loading,
   loaded,

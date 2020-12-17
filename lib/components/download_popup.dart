@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/components/custom_alert.dart';
-import 'package:book_app/util/formatter.dart';
+import 'package:book_app/utility/formatter.dart';
 
 class DownloadPopup extends StatefulWidget {
   final String url;
