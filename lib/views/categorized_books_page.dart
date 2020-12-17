@@ -39,7 +39,7 @@ class _GenreState extends State<Genre> {
             centerTitle: true,
             title: Text('${widget.title}'),
           ),
-          body: BodyBuilder(
+          body: WidgetCreator(
             response: provider.apiRequestStatus,
             child: ListView(
               controller: provider.controller,

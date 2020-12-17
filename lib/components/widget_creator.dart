@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:book_app/components/progress_widget.dart';
 import 'package:book_app/utility/response.dart';
 
-class BodyBuilder extends StatelessWidget {
+class WidgetCreator extends StatelessWidget {
   final Response response;
   final Widget child;
   final Function reload;
 
-  BodyBuilder({Key key, this.response, this.child, this.reload})
+  WidgetCreator({Key key, this.response, this.child, this.reload})
       : super(key: key);
 
   @override

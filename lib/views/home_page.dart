@@ -37,7 +37,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               ),
             ),
           ),
-          body: BodyBuilder(
+          body: WidgetCreator(
             response: homeProvider.response,
             child: RefreshIndicator(
               onRefresh: () => homeProvider.getFeeds(),
