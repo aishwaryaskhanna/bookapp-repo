@@ -4,9 +4,7 @@ import 'package:epub_viewer/epub_viewer.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:book_app/components/book_list_item.dart';
 import 'package:book_app/components/description_text.dart';
-import 'package:book_app/components/loading_widget.dart';
 import 'package:book_app/database/locator_helper.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/view_models/details_provider.dart';
@@ -51,32 +49,14 @@ class _DetailsState extends State<Details> {
       builder: (BuildContext context, DetailsProvider detailsProvider,
           Widget child) {
         return Scaffold(
-          appBar: AppBar(
-            actions: <Widget>[
-              IconButton(
-                onPressed: () async {
-                  if (detailsProvider.faved) {
-                    detailsProvider.removeFav();
-                  } else {
-                    detailsProvider.addFav();
-                  }
-                },
-                icon: Icon(
-                  detailsProvider.faved ? Icons.favorite : Feather.heart,
-                  color: detailsProvider.faved
-                      ? Colors.red
-                      : Theme.of(context).iconTheme.color,
-                ),
-              ),
-            ],
-          ),
+          appBar: AppBar(),
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             children: <Widget>[
               SizedBox(height: 10.0),
               _buildImageTitleSection(detailsProvider),
               SizedBox(height: 30.0),
-              _buildSectionTitle('Book Description'),
+              _buildSectionTitle('Description'),
               _buildDivider(),
               SizedBox(height: 10.0),
               DescriptionTextWidget(
@@ -153,12 +133,65 @@ class _DetailsState extends State<Details> {
                     ),
                   ),
                 ),
+                //SizedBox(height: 5.0),
                 Center(
                   child: Container(
-                    height: 20.0,
-                    width: MediaQuery.of(context).size.width,
-                    child: _buildDownloadReadButton(detailsProvider, context),
-                  ),
+                      height: 210.0,
+                      width: MediaQuery.of(context).size.width,
+                      //child: _buildDownloadReadButton(detailsProvider, context),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(height: 5.0),
+                          Center(
+                            child: Container(
+                              height: 20.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: _buildDownloadReadButton(
+                                  detailsProvider, context),
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Center(
+                            child: Container(
+                              height: 20.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: IconButton(
+                                onPressed: () async {
+                                  if (detailsProvider.faved) {
+                                    detailsProvider.removeFav();
+                                  } else {
+                                    detailsProvider.addFav();
+                                  }
+                                },
+                                icon: Icon(
+                                  detailsProvider.faved
+                                      ? Icons.favorite
+                                      : Feather.heart,
+                                  color: detailsProvider.faved
+                                      ? Colors.red
+                                      : Theme.of(context).iconTheme.color,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20.0),
+                          Center(
+                            child: Container(
+                              height: 20.0,
+                              width: MediaQuery.of(context).size.width,
+                              child: IconButton(
+                                onPressed: () => _share(),
+                                icon: Icon(
+                                  Feather.share_2,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                 ),
               ],
             ),
@@ -214,6 +247,9 @@ class _DetailsState extends State<Details> {
         onPressed: () => openBook(provider),
         child: Text(
           'Read Book',
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+          ),
         ),
       );
     } else {
@@ -225,55 +261,9 @@ class _DetailsState extends State<Details> {
         ),
         child: Text(
           'Download',
-        ),
-      );
-    }
-  }
-
-  _buildCategory(Entry entry, BuildContext context) {
-    if (entry.category == null) {
-      return SizedBox();
-    } else {
-      return Container(
-        height: entry.category.length < 3 ? 55.0 : 95.0,
-        child: GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: entry.category.length > 4 ? 4 : entry.category.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 210 / 80,
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
           ),
-          itemBuilder: (BuildContext context, int index) {
-            Category cat = entry.category[index];
-            return Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 5.0, 5.0, 5.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                  border: Border.all(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Text(
-                      '${cat.label}',
-                      style: TextStyle(
-                        color: Theme.of(context).accentColor,
-                        fontSize: cat.label.length > 18 ? 6.0 : 10.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          },
         ),
       );
     }

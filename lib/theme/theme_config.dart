@@ -8,17 +8,6 @@ class ThemeConfig {
   static Color lightBG = Colors.white;
   static Color darkBG = Color(0xff121212);
 
-  /*static ThemeData lightTheme = ThemeData(
-    backgroundColor: lightBG,
-    primaryColor: lightPrimary,
-    accentColor: lightAccent,
-    cursorColor: lightAccent,
-    scaffoldBackgroundColor: lightBG,
-    appBarTheme: AppBarTheme(
-      elevation: 0.0,
-    ),
-  );*/
-
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     backgroundColor: darkBG,

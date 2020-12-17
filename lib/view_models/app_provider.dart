@@ -18,31 +18,4 @@ class AppProvider extends ChangeNotifier {
     navigatorKey = value;
     notifyListeners();
   }
-
-  /*void setTheme(value, c) async {
-    theme = value;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('theme', c);
-    notifyListeners();
-  }*/
-
-  /*ThemeData getTheme(value) {
-    return theme;
-  }*/
-
-  /*Future<ThemeData> checkTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    ThemeData t;
-    String r = prefs.getString('theme') ?? 'light';
-
-    if (r == 'light') {
-      t = ThemeConfig.lightTheme;
-      setTheme(ThemeConfig.lightTheme, 'light');
-    } else {
-      t = ThemeConfig.darkTheme;
-      setTheme(ThemeConfig.darkTheme, 'dark');
-    }
-
-    return t;
-  }*/
 }

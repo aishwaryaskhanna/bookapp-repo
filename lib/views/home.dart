@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:book_app/components/body_builder.dart';
-import 'package:book_app/components/book_card.dart';
-import 'package:book_app/components/book_list_item.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/consts.dart';
 import 'package:book_app/util/router.dart';
@@ -58,8 +56,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       onRefresh: () => homeProvider.getFeeds(),
       child: ListView(
         children: <Widget>[
+          SizedBox(height: 25.0),
           _buildSectionTitle('Explore Categories'),
-          SizedBox(height: 100.0),
+          SizedBox(height: 60.0),
           _buildGenreSection(homeProvider),
           SizedBox(height: 20.0),
         ],
@@ -69,7 +68,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   _buildSectionTitle(String title) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
