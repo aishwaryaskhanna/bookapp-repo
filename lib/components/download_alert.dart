@@ -59,7 +59,7 @@ class _DownloadAlertState extends State<DownloadAlert> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                'Downloading...',
+                'Downloading the book..',
                 style: TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold,
@@ -68,7 +68,10 @@ class _DownloadAlertState extends State<DownloadAlert> {
                 overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 20.0),
-              CircularProgressIndicator(),
+              CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(Colors.cyanAccent),
+              ),
             ],
           ),
         ),
