@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:book_app/components/progress_widget.dart';
-import 'package:book_app/util/request_status.dart';
+import 'package:book_app/util/api_request_status.dart';
 
-class WidgetCreator extends StatelessWidget {
-  final Request status;
-  final Widget childWidget;
+class BodyBuilder extends StatelessWidget {
+  final APIRequestStatus response;
+  final Widget child;
   final Function reload;
 
-  WidgetCreator({Key key, this.status, this.childWidget, this.reload})
+  BodyBuilder({Key key, this.response, this.child, this.reload})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (status == Request.loaded)
-      return childWidget;
+    if (response == APIRequestStatus.loaded)
+      return child;
     else
       return ProgressWidget();
   }

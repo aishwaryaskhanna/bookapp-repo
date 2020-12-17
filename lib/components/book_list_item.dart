@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:book_app/components/loading_widget.dart';
+import 'package:book_app/components/progress_widget.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/router.dart';
 import 'package:uuid/uuid.dart';
@@ -63,7 +63,7 @@ class BookListItem extends StatelessWidget {
                     placeholder: (context, url) => Container(
                       height: 150.0,
                       width: 100.0,
-                      child: LoadingWidget(),
+                      child: ProgressWidget(),
                     ),
                     errorWidget: (context, url, error) => Image.asset(
                       'assets/images/place.png',

@@ -7,7 +7,7 @@ import 'package:book_app/util/api_request_status.dart';
 class HomePageProvider with ChangeNotifier {
   CategoryFeed top = CategoryFeed();
   CategoryFeed recent = CategoryFeed();
-  APIRequestStatus apiRequestStatus = APIRequestStatus.loading;
+  APIRequestStatus response = APIRequestStatus.loading;
   Api api = Api();
 
   getFeeds() async {
@@ -22,7 +22,7 @@ class HomePageProvider with ChangeNotifier {
   }
 
   void setApiRequestStatus(APIRequestStatus value) {
-    apiRequestStatus = value;
+    response = value;
     notifyListeners();
   }
 

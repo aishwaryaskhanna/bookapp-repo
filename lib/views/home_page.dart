@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:book_app/components/body_builder.dart';
+import 'package:book_app/components/widget_creator.dart';
 import 'package:book_app/models/category.dart';
 import 'package:book_app/util/consts.dart';
 import 'package:book_app/util/router.dart';
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   Widget _buildBody(HomePageProvider homeProvider) {
     return BodyBuilder(
-      response: homeProvider.apiRequestStatus,
+      response: homeProvider.response,
       child: _buildBodyList(homeProvider),
       reload: () => homeProvider.getFeeds(),
     );
